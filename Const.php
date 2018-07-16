@@ -4,3 +4,7 @@ $DB_Name = "Shop";
 $Username = "root";
 $Password = "";
 $Host = "localhost:3306";
+
+// JWT
+$authKey = 'berkgulp';
+$jwtExp = 100;

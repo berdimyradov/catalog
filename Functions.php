@@ -1,5 +1,6 @@
 <?php
 include 'Const.php';
+include 'jwt.php';
 
 function connectToDB()
 {
@@ -162,4 +163,76 @@ function DeleteProduct($Product_ID)
     mysqli_query($conn, $command);
     mysqli_close($conn);
     return json_encode(array("Deleted:" => $Product_ID));
+}
+
+function maketoken($username, $password, $exp)
+{
+    $token = array();
+    $token['Username'] = $username;
+    $token['Password'] = $password;
+    $token['exp'] = $exp;
+    global $authKey;
+    return JWT::encode($token, $authKey);
+}
+
+function userValid($username, $password)
+{
+    $conn = connectToDB();
+    $command = "SELECT * FROM Users WHERE Name='$username'";
+    $query = mysqli_query($conn, $command);
+    if ($res = mysqli_fetch_array($query)) {
+        mysqli_close($conn);
+        if ($res['Password'] === $password) {
+            return true;
+        } else {
+            return false;
+        }
+
+    } else {mysqli_close($conn);
+        return false;
+    }
+
+}
+
+function userExists($username, $password)
+{
+    $conn = connectToDB();
+    $command = "SELECT * FROM Users WHERE Name='$username'";
+    $query = mysqli_query($conn, $command);
+    if ($res = mysqli_fetch_array($query)) {mysqli_close($conn);
+        return true;
+    } else {mysqli_close($conn);
+        return false;}
+
+}
+
+function getUser($username, $password)
+{
+    $conn = connectToDB();
+    $command = "SELECT * FROM Users WHERE Name='$username'";
+    $query = mysqli_query($conn, $command);
+    $result = array();
+    if ($res = mysqli_fetch_array($query)) {
+        if ($res['Password'] === $password) {
+            $result["User_ID"] = $res['User_ID'];
+            $result['Username'] = $res["Name"];
+            $result['Password'] = $res['Password'];
+        } else {
+            $result["error"] = "Invalid username or password";
+        }
+
+    } else {
+        $result["error"] = "Invalid username or password";
+    }
+    mysqli_close($conn);
+    return $result;
+}
+
+function registerUser($username, $password)
+{
+    $conn = connectToDB();
+    $command = "INSERT INTO Users (Name,Password) VALUES ('$username','$password')";
+    mysqli_query($conn, $command);
+    mysqli_close($conn);
+    return getUser($username, $password);
 }
