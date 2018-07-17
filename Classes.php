@@ -2,6 +2,7 @@
 
 //include "Functions.php";
 
+// @todo:KerimJobs - class Product ayratyn faylda bolsun 
 class Product
 {
 
@@ -39,6 +40,7 @@ class Product
     }
 }
 
+// @todo:KerimJobs - class Category ayratyn faylda bolsun 
 class Category
 {
     public function Insert($jsonData)

@@ -27,6 +27,8 @@ function CreateDB($host, $user, $pass, $DBName)
     mysqli_close($conn);
 }
 
+//@todo Category bilen ishleyan funkciyalary ayratyn fayla gechir
+//      path: ./controllers/ItemController.php
 function InsertCategory($CategoryName)
 {
     $conn = connectToDB();
@@ -80,6 +82,8 @@ function getCategoryList()
     return json_encode($res);
 }
 
+// @todo:KerimJobs Products bilen ishleayn funkciyalary ayratyn fayla gechir
+//      path: ./controllers/ProducController.php
 function ProductsByCategory($Cat_ID)
 {
     $conn = connectToDB();
@@ -165,6 +169,7 @@ function DeleteProduct($Product_ID)
     return json_encode(array("Deleted:" => $Product_ID));
 }
 
+// bu funkciya barde galybersin
 function maketoken($username, $password, $exp)
 {
     $token = array();
@@ -175,6 +180,8 @@ function maketoken($username, $password, $exp)
     return JWT::encode($token, $authKey);
 }
 
+// @todo:KerimJobs Users bilen ishleayn funkciyalary ayratyn fayla gechir
+//      path: ./controllers/UserController.php
 function userValid($username, $password)
 {
     $conn = connectToDB();

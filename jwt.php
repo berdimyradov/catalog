@@ -1,4 +1,18 @@
 <?php
+
+
+// @todo:KerimJobs ohohohoho!!! Bu name bolush!!!?????
+// jwt biblioteka gerek bolsa kopiya edip goshmaly dal proyektyna
+// Awtomatizirlayan gurallar bara. 
+// `Composer` diyip - https://getcomposer.org/
+// Getting started oka - https://getcomposer.org/doc/00-intro.md
+// shona gorade composer duz, hem JWT bibliotekany shon ustu bilen gosh
+// 
+//
+// https://github.com/firebase/php-jwt  saytda ashakragynda okasan shu kod bardyr
+// composer require firebase/php-jwt
+
+
 /**
  * JSON Web Token implementation, based on this spec:
  * http://tools.ietf.org/html/draft-ietf-oauth-json-web-token-06
